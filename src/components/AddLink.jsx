@@ -1,6 +1,6 @@
 import { FiX, FiPlus } from 'react-icons/fi'
 
-export function AddLink({ isnew, value, ...rest }) {
+export function AddLink({ isnew = false, value, onClick, ...rest }) {
     return (
         <div
             isnew={isnew}
@@ -17,8 +17,8 @@ export function AddLink({ isnew, value, ...rest }) {
             </input>
 
             <button 
-            type='button'
-                // onClick={onClick}
+                type='button'
+                onClick={onClick}
             > 
                 { isnew ? <FiPlus size={24} className='text-ORANGE'/> : <FiX size={24} className='text-RED'  />}
             </button>

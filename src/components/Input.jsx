@@ -1,5 +1,5 @@
 
-function Input({ icon: Icon, iconX: IconX, type, ...rest }) {
+function Input({ icon: Icon, iconX: IconX, type, value, ...rest }) {
     return (
         <div className={`flex justify-center h-14 items-center bg-BACKGROUND_900 rounded-[10px] py-4 px-4`}>
             <div>
@@ -9,6 +9,7 @@ function Input({ icon: Icon, iconX: IconX, type, ...rest }) {
             <input
                 {...rest}
                 type={type}
+                value={value}
                 className=" border-none bg-transparent w-full placeholder:text-GRAY_300 placeholder:text-sm text-WHITE" 
             />
 

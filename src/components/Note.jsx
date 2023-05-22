@@ -9,6 +9,9 @@ function Note({ data, ...rest}) {
             <h1 className="flex-1 text-left font-bold text-2xl text-WHITE ">
                 {data.title}
             </h1>
+            <p className=' text-left'>
+                {data.description}
+            </p>
 
             {
                 data.tags && //if tags exist its going to show

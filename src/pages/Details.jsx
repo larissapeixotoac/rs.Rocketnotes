@@ -1,51 +1,112 @@
+import { useParams, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
+import { api } from '../services/api'
+
 import { Button } from "../components/Button"
 import { Header } from "../components/Header"
 import { Section } from "../components/Section"
 import { Tag } from "../components/Tag"
 import { ButtonText } from "../components/ButtonText"
-import { Link } from 'react-router-dom'
 
 function Details() {
-    
-  return(
-    <div className="w-screen h-screen grid grid-flow-row grid-rows-[105px_minmax(500px,_1fr)_50px]">
-      <Header />
+    const [data, setData] = useState(null)
 
-      <main className="row-span-3 overflow-y-auto px-0">
+    const params = useParams()  
+    const navigate = useNavigate()
 
-        <div className=" max-w-[550px] my-0 mx-auto flex flex-col">
-          <div className="text-right mt-16">
-            <ButtonText title="Excluir nota" isActive/>
-          </div>
+    async function handleRemoveNote() {
+        const confirm = window.confirm("Deseja realmente excluir essa nota?")
 
-          <h1 className=" font-medium text-4xl text-WHITE pb-4 pt-16">
-            Introdução ao React
-          </h1>
-          
-          <p className="text-justify font-ff_secondary">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        if(confirm) {
+            await api.delete(`/notes/${params.id}`)
+            navigate(-1)
+        }
+    }
 
-          <Section title="Links úteis">
-            <ul className="list-none">
-              <li><a href="#">https://www.rocketseat.com.br/</a></li>
-              <li><a href="#">https://www.rocketseat.com.br/</a></li>
-            </ul>
-          </Section>
-          <Section title="Marcadores">
-            <div className="flex">
-              <Tag title="express"  />
-              <Tag title="nodejs"  />
-            </div>
-          </Section>
-          <div className="my-10">
-            <Link to="/">
-              <Button title="Voltar"  />
-            </Link>
-          </div> 
+    function handleBack() {
+        navigate(-1)
+    }
+
+    useEffect(() => {
+        async function fetchNote() {
+            const response = await api.get(`/notes/${params.id}`)
+            setData(response.data)
+        }
+
+        fetchNote()
+    }, [])
+
+    return(
+        <div className="w-screen h-screen grid grid-flow-row grid-rows-[105px_minmax(500px,_1fr)_50px]">
+        <Header />
+            {
+                data && 
+                <main className="row-span-3 overflow-y-auto px-0">
+
+                    <div className=" max-w-[550px] my-0 mx-auto flex flex-col">
+                        <div className="text-right mt-16">
+                            <ButtonText 
+                                title="Excluir nota" 
+                                isActive
+                                onClick={handleRemoveNote}
+                            />
+                        </div>
+
+                        <h1 className=" font-medium text-4xl text-WHITE pb-4 pt-16">
+                            {data.title}
+                        </h1>
+                        
+                        <p className="text-justify font-ff_secondary">
+                            {data.description}
+                        </p>
+
+                        {
+                            data.links &&                        
+                            <Section title="Links úteis">
+                                <ul className="list-none">
+                                    {
+                                        data.links.map(link => (
+                                            <li key={String(link.id)}>                                            
+                                                <a href={link.url} target='_SEJ' rel="noreferrer" >
+                                                    {link.url}
+                                                </a>
+                                            </li>
+                                        ))
+                                    }                                
+                                </ul>
+                            </Section>
+                        }
+
+                        {
+                            data.tags &&
+                            <Section title="Marcadores">
+                                <div className="flex">
+                                    {
+                                        data.tags.map(tag => (
+                                            <Tag 
+                                                key={String(tag.id)}
+                                                title={tag.name}  
+                                            />
+                                        ))
+                                    }
+                                </div>
+                            </Section>
+                        }
+
+                        <div className="my-10">
+                            <Button 
+                                title="Voltar"  
+                                onClick={handleBack}
+                            />                            
+                        </div> 
+                    </div>
+                </main>
+            }
+
         </div>
-      </main>
-    </div>
 
-  )
+    )
 }
 
 export { Details }

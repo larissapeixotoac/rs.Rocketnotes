@@ -1,8 +1,9 @@
-function Button({ title, loading, ...rest }) {
+function Button({ title, loading, onClick, ...rest }) {
     
     return (
         <button
             disable={loading}
+            onClick={onClick}
             {...rest}
         className="w-full bg-ORANGE text-BACKGROUND_800 h-14 border-0 py-0 px-4 rounded-[10px] font-medium disabled:opacity-50"
         >
