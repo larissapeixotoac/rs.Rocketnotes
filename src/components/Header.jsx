@@ -14,9 +14,9 @@ function Header() {
 
     const navigate = useNavigate()//
 
-    function handleSigOut() {
+    function handleSignOut() {
+        navigate('/')        
         signOut()
-        navigate(-1)        
     }
 
     return (
@@ -39,7 +39,7 @@ function Header() {
             </Link>
 
             <button 
-                onClick={handleSigOut}
+                onClick={handleSignOut}
                 className=' border-none bg-transparent w-9 h-9'
             >
                 <RiShutDownLine className=' text-GRAY_100 text-4xl' />                

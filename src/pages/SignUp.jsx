@@ -29,7 +29,6 @@ export function SignUp() {
                 navigate(-1)
             })
             .catch(error => {
-                console.log(error)
                 if(error.response) {                    
                     alert(error.response.data.message)
                 } else {
@@ -60,7 +59,7 @@ export function SignUp() {
                         placeholder="Nome" 
                         icon={FiUser} 
                         type="text" 
-                        onChange={event => setName(event.target.value)} //to att the name - event can be named ad 'e'
+                        onChange={event => setName(event.target.value)} //to att the name - event can be named 'e' or anything
                     />
                 </div>
                 <div className=" mt-2 w-[340px]">

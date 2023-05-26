@@ -91,7 +91,7 @@ function Home() {
                 <Link to="/createnote" className="bg-ORANGE text-BACKGROUND_900 h-20 text-xl flex items-center justify-center gap-2 flex-initial">
                     <button title="NewNotes" className="bg-ORANGE text-BACKGROUND_900 h-20 text-xl flex items-center justify-center gap-2 flex-initial">
                         <FiPlus />
-                        New Note
+                        Criar nota
                     </button>
                 </Link>
             </div>
