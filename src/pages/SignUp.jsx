@@ -5,6 +5,7 @@ import { FiMail, FiLock, FiUser } from "react-icons/fi"
 
 import { api } from '../services/api' //
 
+import backgroundImg from "../assets/backgroundImg.svg"
 import { Input } from "../components/Input"
 import { Button } from "../components/Button"
 import { ButtonText } from "../components/ButtonText"
@@ -45,10 +46,9 @@ export function SignUp() {
 
     return (
         <div title="Container" className="flex flex-row w-screem h-screen justify-end">
-
-            <div title="Cover" className="bg-backgroundImg flex-1 bg-no-repeat bg-center bg-cover opacity-20">   
-            </div>            
-
+            
+            <img src={backgroundImg} alt="" className="flex-1 opacity-20 object-cover "/>
+                       
             <div title="SignUn" className=" pt-60 px-32">
                 <Title  />
                 <div className="mt-12">

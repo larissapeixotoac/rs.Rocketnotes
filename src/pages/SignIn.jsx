@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import { useAuth } from '../hooks/auth'
 
+import backgroundImg from "../assets/backgroundImg.svg"
 import { Input } from "../components/Input"
 import { Button } from "../components/Button"
 import { ButtonText } from "../components/ButtonText"
@@ -57,9 +58,8 @@ function SignIn() {
                     </div>                
                 </Link>
             </div>
-
-            <div title="Cover" className="bg-backgroundImg flex-1 bg-no-repeat bg-center bg-cover opacity-20">
-            </div>
+            
+            <img src={backgroundImg} alt="" className="flex-1 opacity-20 object-cover "/>
 
         </div>
     )

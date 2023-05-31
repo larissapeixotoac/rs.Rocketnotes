@@ -51,7 +51,6 @@ function Home() {
         async function fetchNotes() {
             const response = await api.get(`/notes?title=${search}&tags=${tagsSelected}`)
             setNotes(response.data)
-            console.log(`/notes?title=${search}&tags=${tagsSelected}`)
         }
 
         fetchNotes()
